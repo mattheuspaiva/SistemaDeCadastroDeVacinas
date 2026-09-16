@@ -14,15 +14,15 @@ public class HibernateUtil {
 
         try {
 
-            Configuration configuration = new Configuration();
+            Configuration configuracao = new Configuration();
 
-            configuration.configure("hibernate.cfg.xml");
+            configuracao.configure("hibernate.cfg.xml");
 
-            configuration.addAnnotatedClass(Fabricante.class);
-            configuration.addAnnotatedClass(Vacina.class);
-            configuration.addAnnotatedClass(Lote.class);
+            configuracao.addAnnotatedClass(Fabricante.class);
+            configuracao.addAnnotatedClass(Vacina.class);
+            configuracao.addAnnotatedClass(Lote.class);
 
-            return configuration.buildSessionFactory();
+            return configuracao.buildSessionFactory();
 
         } catch (Throwable erro) {
 
