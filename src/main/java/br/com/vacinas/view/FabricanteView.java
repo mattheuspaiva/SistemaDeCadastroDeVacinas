@@ -62,7 +62,7 @@ public class FabricanteView {
     }
 
     private void listar(){
-        List<Fabricante> fabricantes = service.listasTodos();
+        List<Fabricante> fabricantes = service.listarTodos();
 
         if(fabricantes.isEmpty()){
             System.out.println("Nenhum fabricante encontrado!");
@@ -76,7 +76,7 @@ public class FabricanteView {
 
     private void buscar(){
         System.out.println("ID do Fabricante: ");
-        int id = Integer.parseInt(leitor.nextLine());
+        Long id = Long.parseLong(leitor.nextLine());
 
         Fabricante fabricante = service.buscarPorId(id);
         if(fabricante == null){
@@ -88,7 +88,7 @@ public class FabricanteView {
 
     private void atualizar(){
         System.out.println("ID do Fabricante: ");
-        int id = Integer.parseInt(leitor.nextLine());
+        Long id = Long.parseLong(leitor.nextLine());
 
         System.out.println("Novo nome: ");
         String nome = leitor.nextLine();
@@ -102,7 +102,7 @@ public class FabricanteView {
 
     private void excluir(){
      System.out.println("ID do Fabricante: ");
-     int id = Integer.parseInt(leitor.nextLine());
+     Long id = Long.parseLong(leitor.nextLine());
 
      service.excluir(id);
 
