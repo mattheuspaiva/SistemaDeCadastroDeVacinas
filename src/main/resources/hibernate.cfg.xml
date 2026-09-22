@@ -18,11 +18,11 @@
         </property>
 
         <property name="hibernate.connection.username">
-            sa
+            VacinasSQL
         </property>
 
         <property name="hibernate.connection.password">
-            SUA_SENHA
+            12345
         </property>
 
         <!-- Dialeto -->
