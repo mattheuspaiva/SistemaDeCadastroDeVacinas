@@ -21,7 +21,7 @@ public class VacinaView {
 
         do {
 
-            System.out.println("\n===== VACINAS =====");
+            System.out.println("\n----- VACINAS -----");
             System.out.println("1 - Cadastrar");
             System.out.println("2 - Listar");
             System.out.println("3 - Buscar por ID");

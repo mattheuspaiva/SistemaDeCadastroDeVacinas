@@ -19,7 +19,7 @@ public class FabricanteView {
         int opcao;
 
         do {
-            System.out.println("\n===== Fabricantes ======");
+            System.out.println("\n----- FABRICANTES -----");
             System.out.println("1 - Cadastrar");
             System.out.println("2 - Listar");
             System.out.println("3 - Buscar por ID");
@@ -27,7 +27,7 @@ public class FabricanteView {
             System.out.println("5 - Excluir");
             System.out.println("0 - Voltar");
 
-            System.out.println("Escolha uma opcao: ");
+            System.out.print("Escolha uma opcao: ");
             opcao = Integer.parseInt(leitor.nextLine());
 
             try{

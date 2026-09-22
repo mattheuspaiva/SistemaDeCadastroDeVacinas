@@ -25,15 +25,14 @@ public class MenuView {
         do {
 
             System.out.println();
-            System.out.println("=================================");
             System.out.println("     SISTEMA DE CADASTRO DE      ");
             System.out.println("             VACINAS             ");
-            System.out.println("=================================");
+            System.out.println("---------------------------------");
             System.out.println("1 - Fabricantes");
             System.out.println("2 - Vacinas");
             System.out.println("3 - Lotes");
             System.out.println("0 - Sair");
-            System.out.println("=================================");
+            System.out.println("---------------------------------");
 
             System.out.print("Escolha: ");
             opcao = Integer.parseInt(leitor.nextLine());
