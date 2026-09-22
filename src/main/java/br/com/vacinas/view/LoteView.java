@@ -4,6 +4,7 @@ import br.com.vacinas.model.Lote;
 import br.com.vacinas.service.LoteService;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,6 +12,9 @@ public class LoteView {
 
     private final Scanner scanner;
     private final LoteService service;
+
+    private final DateTimeFormatter formatter =
+            DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public LoteView(Scanner leitor) {
         this.scanner = leitor;
@@ -66,13 +70,13 @@ public class LoteView {
         System.out.print("Número do lote: ");
         String numero = scanner.nextLine();
 
-        System.out.print("Data de fabricação (AAAA-MM-DD): ");
+        System.out.print("Data de fabricação (DD/MM/AAAA): ");
         LocalDate dataFabricacao =
-                LocalDate.parse(scanner.nextLine());
+                LocalDate.parse(scanner.nextLine(), formatter);
 
-        System.out.print("Data de validade (AAAA-MM-DD): ");
+        System.out.print("Data de validade (DD/MM/AAAA): ");
         LocalDate dataValidade =
-                LocalDate.parse(scanner.nextLine());
+                LocalDate.parse(scanner.nextLine(), formatter);
 
         System.out.print("Quantidade: ");
         int quantidade =
@@ -129,13 +133,13 @@ public class LoteView {
         System.out.print("Número do lote: ");
         String numero = scanner.nextLine();
 
-        System.out.print("Data de fabricação (AAAA-MM-DD): ");
+        System.out.print("Data de fabricação (DD/MM/AAAA): ");
         LocalDate dataFabricacao =
-                LocalDate.parse(scanner.nextLine());
+                LocalDate.parse(scanner.nextLine(), formatter);
 
-        System.out.print("Data de validade (AAAA-MM-DD): ");
+        System.out.print("Data de validade (DD/MM/AAAA): ");
         LocalDate dataValidade =
-                LocalDate.parse(scanner.nextLine());
+                LocalDate.parse(scanner.nextLine(), formatter);
 
         System.out.print("Quantidade: ");
         int quantidade =
