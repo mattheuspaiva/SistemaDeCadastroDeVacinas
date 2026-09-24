@@ -7,17 +7,17 @@ import java.util.List;
 import java.util.Scanner;
 
 public class VacinaView {
-    private final Scanner scanner;
+    private final Scanner leitor;
     private final VacinaService service;
 
     public VacinaView(Scanner leitor) {
-        this.scanner = leitor;
+        this.leitor = leitor;
         this.service = new VacinaService();
     }
 
     public void menu() {
 
-        int opcao;
+        String opcao;
 
         do {
 
@@ -30,55 +30,57 @@ public class VacinaView {
             System.out.println("0 - Voltar");
 
             System.out.print("Escolha: ");
-            opcao = Integer.parseInt(scanner.nextLine());
+            opcao = leitor.nextLine();
 
-            try {
+            switch (opcao) {
 
-                switch (opcao) {
+                case "1":
+                    cadastrar();
+                    break;
 
-                    case 1 -> cadastrar();
+                case "2":
+                    listar();
+                    break;
 
-                    case 2 -> listar();
+                case "3":
+                    buscar();
+                    break;
 
-                    case 3 -> buscar();
+                case "4":
+                    atualizar();
+                    break;
 
-                    case 4 -> atualizar();
+                case "5":
+                    excluir();
+                    break;
 
-                    case 5 -> excluir();
+                case "0":
+                    System.out.println("Voltando...");
+                    break;
 
-                    case 0 -> System.out.println("Voltando...");
-
-                    default -> System.out.println("Opção inválida.");
-                }
-
-            } catch (Exception erro) {
-
-                System.out.println("Erro: " + erro.getMessage());
+                default:
+                    System.out.println("Opção inválida!");
+                    break;
             }
 
-        } while (opcao != 0);
+        } while (!opcao.equals("0"));
     }
 
     private void cadastrar() {
 
         System.out.print("Nome da vacina: ");
-        String nome = scanner.nextLine();
+        String nome = leitor.nextLine();
 
         System.out.print("Tipo: ");
-        String tipo = scanner.nextLine();
+        String tipo = leitor.nextLine();
 
         System.out.print("Número de doses: ");
-        int numeroDoses = Integer.parseInt(scanner.nextLine());
+        int numeroDoses = Integer.parseInt(leitor.nextLine());
 
         System.out.print("ID do fabricante: ");
-        Long fabricanteId = Long.parseLong(scanner.nextLine());
+        Long fabricanteId = Long.parseLong(leitor.nextLine());
 
-        service.cadastrar(
-                nome,
-                tipo,
-                numeroDoses,
-                fabricanteId
-        );
+        service.cadastrar(nome, tipo, numeroDoses, fabricanteId);
 
         System.out.println("Vacina cadastrada com sucesso!");
     }
@@ -100,7 +102,7 @@ public class VacinaView {
     private void buscar() {
 
         System.out.print("ID: ");
-        Long id = Long.parseLong(scanner.nextLine());
+        Long id = Long.parseLong(leitor.nextLine());
 
         Vacina vacina = service.buscarPorId(id);
 
@@ -114,27 +116,21 @@ public class VacinaView {
     private void atualizar() {
 
         System.out.print("ID da vacina: ");
-        Long id = Long.parseLong(scanner.nextLine());
+        Long id = Long.parseLong(leitor.nextLine());
 
         System.out.print("Nome: ");
-        String nome = scanner.nextLine();
+        String nome = leitor.nextLine();
 
         System.out.print("Tipo: ");
-        String tipo = scanner.nextLine();
+        String tipo = leitor.nextLine();
 
         System.out.print("Número de doses: ");
-        int numeroDoses = Integer.parseInt(scanner.nextLine());
+        int numeroDoses = Integer.parseInt(leitor.nextLine());
 
         System.out.print("ID do fabricante: ");
-        Long fabricanteId = Long.parseLong(scanner.nextLine());
+        Long fabricanteId = Long.parseLong(leitor.nextLine());
 
-        service.atualizar(
-                id,
-                nome,
-                tipo,
-                numeroDoses,
-                fabricanteId
-        );
+        service.atualizar(id, nome, tipo, numeroDoses, fabricanteId);
 
         System.out.println("Vacina atualizada!");
     }
@@ -142,7 +138,7 @@ public class VacinaView {
     private void excluir() {
 
         System.out.print("ID da vacina: ");
-        Long id = Long.parseLong(scanner.nextLine());
+        Long id = Long.parseLong(leitor.nextLine());
 
         service.excluir(id);
 

@@ -10,20 +10,20 @@ import java.util.Scanner;
 
 public class LoteView {
 
-    private final Scanner scanner;
+    private final Scanner leitor;
     private final LoteService service;
 
     private final DateTimeFormatter formatter =
             DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public LoteView(Scanner leitor) {
-        this.scanner = leitor;
+        this.leitor = leitor;
         this.service = new LoteService();
     }
 
     public void menu() {
 
-        int opcao;
+        String opcao;
 
         do {
 
@@ -36,63 +36,64 @@ public class LoteView {
             System.out.println("0 - Voltar");
 
             System.out.print("Escolha: ");
-            opcao = Integer.parseInt(scanner.nextLine());
+            opcao = leitor.nextLine();
 
-            try {
+            switch (opcao) {
 
-                switch (opcao) {
+                case "1":
+                    cadastrar();
+                    break;
 
-                    case 1 -> cadastrar();
+                case "2":
+                    listar();
+                    break;
 
-                    case 2 -> listar();
+                case "3":
+                    buscar();
+                    break;
 
-                    case 3 -> buscar();
+                case "4":
+                    atualizar();
+                    break;
 
-                    case 4 -> atualizar();
+                case "5":
+                    excluir();
+                    break;
 
-                    case 5 -> excluir();
+                case "0":
+                    System.out.println("Voltando...");
+                    break;
 
-                    case 0 -> System.out.println("Voltando...");
-
-                    default -> System.out.println("Opção inválida.");
-                }
-
-            } catch (Exception erro) {
-
-                System.out.println("Erro: " + erro.getMessage());
+                default:
+                    System.out.println("Opção inválida!");
+                    break;
             }
 
-        } while (opcao != 0);
+        } while (!opcao.equals("0"));
     }
 
     private void cadastrar() {
 
         System.out.print("Número do lote: ");
-        String numero = scanner.nextLine();
+        String numero = leitor.nextLine();
 
         System.out.print("Data de fabricação (DD/MM/AAAA): ");
         LocalDate dataFabricacao =
-                LocalDate.parse(scanner.nextLine(), formatter);
+                LocalDate.parse(leitor.nextLine(), formatter);
 
         System.out.print("Data de validade (DD/MM/AAAA): ");
         LocalDate dataValidade =
-                LocalDate.parse(scanner.nextLine(), formatter);
+                LocalDate.parse(leitor.nextLine(), formatter);
 
         System.out.print("Quantidade: ");
         int quantidade =
-                Integer.parseInt(scanner.nextLine());
+                Integer.parseInt(leitor.nextLine());
 
         System.out.print("ID da vacina: ");
         Long vacinaId =
-                Long.parseLong(scanner.nextLine());
+                Long.parseLong(leitor.nextLine());
 
-        service.cadastrar(
-                numero,
-                dataFabricacao,
-                dataValidade,
-                quantidade,
-                vacinaId
-        );
+        service.cadastrar(numero, dataFabricacao, dataValidade, quantidade, vacinaId);
 
         System.out.println("Lote cadastrado com sucesso!");
     }
@@ -114,7 +115,7 @@ public class LoteView {
     private void buscar() {
 
         System.out.print("ID: ");
-        Long id = Long.parseLong(scanner.nextLine());
+        Long id = Long.parseLong(leitor.nextLine());
 
         Lote lote = service.buscarPorId(id);
 
@@ -128,26 +129,26 @@ public class LoteView {
     private void atualizar() {
 
         System.out.print("ID do lote: ");
-        Long id = Long.parseLong(scanner.nextLine());
+        Long id = Long.parseLong(leitor.nextLine());
 
         System.out.print("Número do lote: ");
-        String numero = scanner.nextLine();
+        String numero = leitor.nextLine();
 
         System.out.print("Data de fabricação (DD/MM/AAAA): ");
         LocalDate dataFabricacao =
-                LocalDate.parse(scanner.nextLine(), formatter);
+                LocalDate.parse(leitor.nextLine(), formatter);
 
         System.out.print("Data de validade (DD/MM/AAAA): ");
         LocalDate dataValidade =
-                LocalDate.parse(scanner.nextLine(), formatter);
+                LocalDate.parse(leitor.nextLine(), formatter);
 
         System.out.print("Quantidade: ");
         int quantidade =
-                Integer.parseInt(scanner.nextLine());
+                Integer.parseInt(leitor.nextLine());
 
         System.out.print("ID da vacina: ");
         Long vacinaId =
-                Long.parseLong(scanner.nextLine());
+                Long.parseLong(leitor.nextLine());
 
         service.atualizar(
                 id,
@@ -164,7 +165,7 @@ public class LoteView {
     private void excluir() {
 
         System.out.print("ID do lote: ");
-        Long id = Long.parseLong(scanner.nextLine());
+        Long id = Long.parseLong(leitor.nextLine());
 
         service.excluir(id);
 

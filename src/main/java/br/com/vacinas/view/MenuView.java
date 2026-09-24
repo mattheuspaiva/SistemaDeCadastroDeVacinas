@@ -3,6 +3,7 @@ package br.com.vacinas.view;
 import java.util.Scanner;
 
 public class MenuView {
+
     private final Scanner leitor;
 
     private final FabricanteView fabricanteView;
@@ -10,7 +11,6 @@ public class MenuView {
     private final LoteView loteView;
 
     public MenuView() {
-
         leitor = new Scanner(System.in);
 
         fabricanteView = new FabricanteView(leitor);
@@ -20,7 +20,7 @@ public class MenuView {
 
     public void exibir() {
 
-        int opcao;
+        String opcao;
 
         do {
 
@@ -35,25 +35,34 @@ public class MenuView {
             System.out.println("---------------------------------");
 
             System.out.print("Escolha: ");
-            opcao = Integer.parseInt(leitor.nextLine());
+            opcao = leitor.nextLine().trim();
 
             switch (opcao) {
 
-                case 1 -> fabricanteView.menu();
+                case "1":
+                    fabricanteView.menu();
+                    break;
 
-                case 2 -> vacinaView.menu();
+                case "2":
+                    vacinaView.menu();
+                    break;
 
-                case 3 -> loteView.menu();
+                case "3":
+                    loteView.menu();
+                    break;
 
-                case 0 ->
-                        System.out.println("Encerrando o sistema...");
+                case "0":
+                    System.out.println("Encerrando o sistema...");
+                    break;
 
-                default ->
-                        System.out.println("Opção inválida.");
+                default:
+                    System.out.println("Opção inválida!");
+                    break;
             }
 
-        } while (opcao != 0);
+        } while (!opcao.equals("0"));
 
         leitor.close();
     }
 }
+

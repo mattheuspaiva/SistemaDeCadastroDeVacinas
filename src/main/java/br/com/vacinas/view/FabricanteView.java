@@ -15,8 +15,9 @@ public class FabricanteView {
         this.service = new FabricanteService();
     }
 
-    public void menu(){
-        int opcao;
+    public void menu() {
+
+        String opcao;
 
         do {
             System.out.println("\n----- FABRICANTES -----");
@@ -28,32 +29,47 @@ public class FabricanteView {
             System.out.println("0 - Voltar");
 
             System.out.print("Escolha uma opcao: ");
-            opcao = Integer.parseInt(leitor.nextLine());
+            opcao = leitor.nextLine();
 
-            try{
-                switch(opcao){
-                    case 1 -> cadastrar();
-                    case 2 -> listar();
-                    case 3 -> buscar();
-                    case 4 -> atualizar();
-                    case 5 -> excluir();
-                    case 0 -> System.out.println("Voltando...");
-                    default -> System.out.println("Opcao invalida");
-                }
-            }
-            catch (Exception erro){
-                System.out.println("Erro: " + erro.getMessage());
-            }
-        }
+            switch (opcao) {
 
-        while (opcao != 0);
+                case "1":
+                    cadastrar();
+                    break;
+
+                case "2":
+                    listar();
+                    break;
+
+                case "3":
+                    buscar();
+                    break;
+
+                case "4":
+                    atualizar();
+                    break;
+
+                case "5":
+                    excluir();
+                    break;
+
+                case "0":
+                    System.out.println("Voltando...");
+                    break;
+
+                default:
+                    System.out.println("Opcao invalida!");
+                    break;
+            }
+
+        } while (!opcao.equals("0"));
     }
 
     private void cadastrar(){
         System.out.println("Digite o nome do fabricante: ");
         String nome = leitor.nextLine();
 
-        System.out.println("Pais do Fabricante: ");
+        System.out.println("País do Fabricante: ");
         String pais = leitor.nextLine();
 
         service.cadastrar(nome,pais);
