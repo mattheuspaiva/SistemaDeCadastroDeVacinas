@@ -11,20 +11,20 @@ public class VacinaDAO {
 
     public void salvar(Vacina vacina) {
 
-        Transaction transaction = null;
+        Transaction transacao = null;
 
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session sessao = HibernateUtil.getSessionFactory().openSession()) {
 
-            transaction = session.beginTransaction();
+            transacao = sessao.beginTransaction();
 
-            session.persist(vacina);
+            sessao.persist(vacina);
 
-            transaction.commit();
+            transacao.commit();
 
         } catch (Exception erro) {
 
-            if (transaction != null) {
-                transaction.rollback();
+            if (transacao != null) {
+                transacao.rollback();
             }
 
             throw erro;
@@ -33,17 +33,17 @@ public class VacinaDAO {
 
     public Vacina buscarPorId(Long id) {
 
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session sessao = HibernateUtil.getSessionFactory().openSession()) {
 
-            return session.get(Vacina.class, id);
+            return sessao.get(Vacina.class, id);
         }
     }
 
     public List<Vacina> listarTodos() {
 
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session sessao = HibernateUtil.getSessionFactory().openSession()) {
 
-            return session
+            return sessao
                     .createQuery("FROM Vacina", Vacina.class)
                     .list();
         }
@@ -51,20 +51,20 @@ public class VacinaDAO {
 
     public void atualizar(Vacina vacina) {
 
-        Transaction transaction = null;
+        Transaction transacao = null;
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
-            transaction = session.beginTransaction();
+            transacao = session.beginTransaction();
 
             session.merge(vacina);
 
-            transaction.commit();
+            transacao.commit();
 
         } catch (Exception erro) {
 
-            if (transaction != null) {
-                transaction.rollback();
+            if (transacao != null) {
+                transacao.rollback();
             }
 
             throw erro;
@@ -73,11 +73,11 @@ public class VacinaDAO {
 
     public void excluir(Long id) {
 
-        Transaction transaction = null;
+        Transaction transacao = null;
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
-            transaction = session.beginTransaction();
+            transacao = session.beginTransaction();
 
             Vacina vacina = session.get(Vacina.class, id);
 
@@ -85,12 +85,12 @@ public class VacinaDAO {
                 session.remove(vacina);
             }
 
-            transaction.commit();
+            transacao.commit();
 
         } catch (Exception erro) {
 
-            if (transaction != null) {
-                transaction.rollback();
+            if (transacao != null) {
+                transacao.rollback();
             }
 
             throw erro;

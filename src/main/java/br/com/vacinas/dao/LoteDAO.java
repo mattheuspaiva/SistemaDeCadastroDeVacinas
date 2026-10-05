@@ -11,20 +11,20 @@ public class LoteDAO {
 
     public void salvar(Lote lote) {
 
-        Transaction transaction = null;
+        Transaction transacao = null;
 
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session sessao = HibernateUtil.getSessionFactory().openSession()) {
 
-            transaction = session.beginTransaction();
+            transacao = sessao.beginTransaction();
 
-            session.persist(lote);
+            sessao.persist(lote);
 
-            transaction.commit();
+            transacao.commit();
 
         } catch (Exception erro) {
 
-            if (transaction != null) {
-                transaction.rollback();
+            if (transacao != null) {
+                transacao.rollback();
             }
 
             throw erro;
@@ -33,17 +33,17 @@ public class LoteDAO {
 
     public Lote buscarPorId(Long id) {
 
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session sessao = HibernateUtil.getSessionFactory().openSession()) {
 
-            return session.get(Lote.class, id);
+            return sessao.get(Lote.class, id);
         }
     }
 
     public List<Lote> listarTodos() {
 
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session sessao = HibernateUtil.getSessionFactory().openSession()) {
 
-            return session
+            return sessao
                     .createQuery("FROM Lote", Lote.class)
                     .list();
         }
@@ -51,20 +51,20 @@ public class LoteDAO {
 
     public void atualizar(Lote lote) {
 
-        Transaction transaction = null;
+        Transaction transacao = null;
 
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session sessao = HibernateUtil.getSessionFactory().openSession()) {
 
-            transaction = session.beginTransaction();
+            transacao = sessao.beginTransaction();
 
-            session.merge(lote);
+            sessao.merge(lote);
 
-            transaction.commit();
+            transacao.commit();
 
         } catch (Exception erro) {
 
-            if (transaction != null) {
-                transaction.rollback();
+            if (transacao != null) {
+                transacao.rollback();
             }
 
             throw erro;
@@ -73,24 +73,24 @@ public class LoteDAO {
 
     public void excluir(Long id) {
 
-        Transaction transaction = null;
+        Transaction transacao = null;
 
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session sessao = HibernateUtil.getSessionFactory().openSession()) {
 
-            transaction = session.beginTransaction();
+            transacao = sessao.beginTransaction();
 
-            Lote lote = session.get(Lote.class, id);
+            Lote lote = sessao.get(Lote.class, id);
 
             if (lote != null) {
-                session.remove(lote);
+                sessao.remove(lote);
             }
 
-            transaction.commit();
+            transacao.commit();
 
         } catch (Exception erro) {
 
-            if (transaction != null) {
-                transaction.rollback();
+            if (transacao != null) {
+                transacao.rollback();
             }
 
             throw erro;
