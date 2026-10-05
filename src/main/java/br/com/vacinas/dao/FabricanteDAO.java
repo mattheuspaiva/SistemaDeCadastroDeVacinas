@@ -11,20 +11,20 @@ public class FabricanteDAO {
 
     public void salvar(Fabricante fabricante) {
 
-        Transaction transaction = null;
+        Transaction transacao = null;
 
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session sessao = HibernateUtil.getSessionFactory().openSession()) {
 
-            transaction = session.beginTransaction();
+            transacao = sessao.beginTransaction();
 
-            session.persist(fabricante);
+            sessao.persist(fabricante);
 
-            transaction.commit();
+            transacao.commit();
 
         } catch (Exception erro) {
 
-            if (transaction != null) {
-                transaction.rollback();
+            if (transacao != null) {
+                transacao.rollback();
             }
 
             throw erro;
@@ -33,17 +33,17 @@ public class FabricanteDAO {
 
     public Fabricante buscarPorId(Long id) {
 
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session sessao = HibernateUtil.getSessionFactory().openSession()) {
 
-            return session.get(Fabricante.class, id);
+            return sessao.get(Fabricante.class, id);
         }
     }
 
     public List<Fabricante> listarTodos() {
 
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session sessao = HibernateUtil.getSessionFactory().openSession()) {
 
-            return session
+            return sessao
                     .createQuery("FROM Fabricante", Fabricante.class)
                     .list();
         }
@@ -51,20 +51,20 @@ public class FabricanteDAO {
 
     public void atualizar(Fabricante fabricante) {
 
-        Transaction transaction = null;
+        Transaction transacao = null;
 
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session sessao = HibernateUtil.getSessionFactory().openSession()) {
 
-            transaction = session.beginTransaction();
+            transacao = sessao.beginTransaction();
 
-            session.merge(fabricante);
+            sessao.merge(fabricante);
 
-            transaction.commit();
+            transacao.commit();
 
         } catch (Exception erro) {
 
-            if (transaction != null) {
-                transaction.rollback();
+            if (transacao != null) {
+                transacao.rollback();
             }
 
             throw erro;
@@ -73,24 +73,24 @@ public class FabricanteDAO {
 
     public void excluir(Long id) {
 
-        Transaction transaction = null;
+        Transaction transacao = null;
 
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session sessao = HibernateUtil.getSessionFactory().openSession()) {
 
-            transaction = session.beginTransaction();
+            transacao = sessao.beginTransaction();
 
-            Fabricante fabricante = session.get(Fabricante.class, id);
+            Fabricante fabricante = sessao.get(Fabricante.class, id);
 
             if (fabricante != null) {
-                session.remove(fabricante);
+                sessao.remove(fabricante);
             }
 
-            transaction.commit();
+            transacao.commit();
 
         } catch (Exception erro) {
 
-            if (transaction != null) {
-                transaction.rollback();
+            if (transacao != null) {
+                transacao.rollback();
             }
 
             throw erro;
